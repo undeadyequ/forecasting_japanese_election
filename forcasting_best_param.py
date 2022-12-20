@@ -337,7 +337,7 @@ if __name__ == '__main__':
 
 
     feats_arrays = {}
-    for method in methods_blr:
+    for method in methods:
         #logging.info("***** Start Train by Method: {} with {} *****".format(method, csv_data))
         #logging.info("Config: {}".format(""))
 
@@ -385,5 +385,5 @@ if __name__ == '__main__':
                                     ])
     print(pd_data)
     # pred_data and acc_data
-    csvdata.to_csv(args.method_blr + "_pred.csv")
-    pd_data.to_csv(args.method_blr + "_acc1.csv")
+    csvdata.to_csv(args.methods + "_pred.csv")
+    pd_data.to_csv(args.methods + "_acc1.csv")
