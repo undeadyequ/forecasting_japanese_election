@@ -7,9 +7,13 @@ You can ues pip to setup the environment by doing follows:
 pip install -r ./requirements.txt
 ```
 # Model evaluation
-To evaluate the the proposed and benchmark models, please run the following code:
+To evaluate the proposed and benchmark models (except linear gradient boosting), please run the following code:
 ```c
 python forcasting_best_param.py
+```
+To evalute the linear gradient boosting model, please run;
+```c
+python pred_blr.py
 ```
 
 # Japanese election data
