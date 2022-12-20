@@ -2,10 +2,12 @@
 This is the implement of the paper "Forecasting Japanese elections by ensemble decision tree models".
 
 # Install 
+You can ues pip to setup the environment by doing follows:
 ```c
 pip install -r ./requirements.txt
 ```
-# Forecasting
+# Model evaluation
+To evaluate the the proposed and benchmark models, please run the following code:
 ```c
 python forcasting_best_param.py
 ```
