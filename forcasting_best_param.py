@@ -1,81 +1,21 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from sklearn import preprocessing
-from sklearn.model_selection import LeaveOneOut
 from sklearn.linear_model import LinearRegression, BayesianRidge, ARDRegression
 from sklearn.tree import DecisionTreeRegressor, ExtraTreeRegressor
-from sklearn.model_selection import cross_val_score
 from sklearn.metrics import explained_variance_score, mean_absolute_error, mean_squared_error
 from sklearn.ensemble import RandomForestRegressor, AdaBoostRegressor, BaggingRegressor, GradientBoostingRegressor, \
     ExtraTreesRegressor
 from xgboost import XGBRegressor
 from sklearn.svm import SVR
-from sklearn.model_selection import GridSearchCV
 from sklearn.inspection import permutation_importance
 import logging
 import argparse
 import time
-import pandas as pd
 import json
 
 
 pd.options.display.float_format = '{:.2f}'.format
-
-
-
-def explore_data(csv_f):
-    csvdata = pd.read_csv(csv_f, delimiter=",")
-    # 学習データとテストデータへの分割
-    csvdata_clean = csvdata.drop(['Year', 'LDP_votes', 'PM_approval2'], axis=1)
-    days = csvdata_clean["DAYS"].values
-    gdp = csvdata_clean["GDP"].values
-    pm_approval = csvdata_clean["PM_approval"].values
-    ldp_seats = csvdata_clean["LDP_seats"].values
-
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection="3d")
-    ax.set_xlabel("days")
-    ax.set_ylabel("gdp")
-    ax.set_zlabel('PM_approval')
-
-    #for i, txt in enumerate(ldp_seats):
-     #   ax.annotate(txt, (days[i], gdp[i]))
-    img = ax.scatter(days, gdp, pm_approval, c=ldp_seats, cmap=plt.hot())
-    fig.colorbar(img)
-    plt.savefig("3d_vis")
-
-
-def explore_data_2d(csv_f):
-    csvdata = pd.read_csv(csv_f, delimiter=",")
-    # 学習データとテストデータへの分割
-    csvdata_clean = csvdata.drop(['Year', 'LDP_votes', 'PM_approval2'], axis=1)
-    days = csvdata_clean["DAYS"].values
-    gdp = csvdata_clean["GDP"].values
-    pm_approval = csvdata_clean["PM_approval"].values
-    ldp_seats = csvdata_clean["LDP_seats"].values
-
-    fig = plt.figure()
-    ax = fig.add_subplot(131)
-    ax.set_xlabel("days")
-    ax.set_ylabel("gdp")
-    ax.scatter(days, gdp, c=ldp_seats, cmap=plt.hot())
-    #fig.colorbar(img1)
-
-    ax = fig.add_subplot(132)
-    ax.set_xlabel("days")
-    ax.set_ylabel("gdp")
-    ax.scatter(days, gdp, c=ldp_seats, cmap=plt.hot())
-    #fig.colorbar(img2)
-
-    ax = fig.add_subplot(133)
-    ax.set_xlabel("days")
-    ax.set_ylabel("gdp")
-    img = ax.scatter(days, gdp, c=ldp_seats, cmap=plt.hot())
-    fig.colorbar(img)
-
-    plt.show()
-
 
 def random_select_data(data, s, data_condition=("N2012")):
     csvdata = pd.read_csv(data, delimiter=",")
@@ -368,6 +308,7 @@ if __name__ == '__main__':
     parser.add_argument("--log", default="log_correct1.txt")
     parser.add_argument("--seed_num", type=int, default=100)
     parser.add_argument("--title", type=str, default="data_election_2020_correct2012")
+    parser.add_argument("--resname", type=str, default="method_blr")
 
     csvdata = pd.read_csv("data_election_pred.csv", delimiter=",")
 
@@ -392,10 +333,11 @@ if __name__ == '__main__':
     methods = ["lr", "dt", "rf", "bag", "adaboost", "gradient_boost"]
     methods_wl = ["lr", "dt", "rf", "bag_lr", "bag_dt", "adaboost_lr", "adaboost_dt", "gradient_boost"]
     methods_xgb = ["lr", "dt", "rf", "bag", "adaboost", "xgb", "gradient_boost"]
+    methods_blr = ["blr"]
 
 
     feats_arrays = {}
-    for method in methods_wl:
+    for method in methods_blr:
         #logging.info("***** Start Train by Method: {} with {} *****".format(method, csv_data))
         #logging.info("Config: {}".format(""))
 
@@ -428,7 +370,7 @@ if __name__ == '__main__':
         for l in result:
             f.write(str(l) + "\n")
 
-    with open("feature_import.json", "w") as f:
+    with open("result/feature_import.json", "w") as f:
         json.dump(feats_arrays, f)
 
     pd_data = pd.DataFrame(np.array(result),
@@ -443,7 +385,5 @@ if __name__ == '__main__':
                                     ])
     print(pd_data)
     # pred_data and acc_data
-    csvdata.to_csv("data_election_pred.csv")
-    pd_data.to_csv("method_acc1.csv")
-
-
+    csvdata.to_csv(args.method_blr + "_pred.csv")
+    pd_data.to_csv(args.method_blr + "_acc1.csv")
