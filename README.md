@@ -20,7 +20,7 @@ python forcasting_best_param.py --method <model> --data <data>  --seed_num <seed
 ```
 The command for training and testing the gradient boost model on the 1960-2012 dataset shown below:
 ```c
-python forcasting_best_param.py --method <model> --data <data>  --seed_num <seed num>
+python forcasting_best_param.py --method gradient_boost --data 2012data  --seed_num 1
 ```
 The more detailed command descriptions are shown in following table:
 
@@ -36,7 +36,7 @@ python pred_blr.py --data
 ```
 The command for training and testing the linear gradient model on the 1960-2009 dataset is shown below:
 ```c
-python pred_blr.py --data
+python pred_blr.py --data 2009
 ```
 The more detailed command descriptions are shown in following table:
 
