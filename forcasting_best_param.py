@@ -147,7 +147,7 @@ def train_clf(method, seeds_num, title, csv_data, data_condition):
                 'min_samples_leaf': 3,
                 'min_samples_split': 2,
                 'n_estimators': 125,
-                'random_state': 0} # shima
+                'random_state': 0}
             clf = GradientBoostingRegressor(**besthyper)
 
         elif method == "gradient_boost":
@@ -160,7 +160,7 @@ def train_clf(method, seeds_num, title, csv_data, data_condition):
                 'min_samples_leaf': 3,
                 'min_samples_split': 2,
                 'n_estimators': 125,
-                'random_state': 0} # shima
+                'random_state': 0}
             clf = GradientBoostingRegressor(**besthyper)
 
         elif method == "xgb":

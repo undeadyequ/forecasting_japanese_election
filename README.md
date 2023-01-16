@@ -1,22 +1,54 @@
-# Forecasting of japanese election
-This is the implement of the paper "Forecasting Japanese elections by ensemble decision tree models".
+# Forecasting Japanese elections by ensemble decision tree models
+This is the origin scikit-learn implement of the following paper: Forecasting Japanese elections by ensemble decision tree models.
 
-# Install 
-You can ues pip to setup the environment by doing follows:
+# Requirements
+- Python 3.7.9
+- pandas==1.1.4
+- matplotlib==3.4.0
+- numpy==1.19.4
+- scikit_learn==1.2.0
+
+Dependencies can be installed using the following command:
 ```c
 pip install -r ./requirements.txt
 ```
+
 # Model evaluation
-To evaluate the proposed and benchmark models (except linear gradient boosting), please run the following code:
+## To evaluate the proposed or benchmark models (except linear gradient boosting), please run the following command:
 ```c
-python forcasting_best_param.py
+python forcasting_best_param.py --method <model> --data <data>  --seed_num <seed num>
 ```
-To evalute the linear gradient boosting model, please run;
+The command for training and testing the gradient boost model on the 1960-2012 dataset shown below:
 ```c
-python pred_blr.py
+python forcasting_best_param.py --method <model> --data <data>  --seed_num <seed num>
 ```
+The more detailed command descriptions are shown in following table:
+
+|  Parameter name  | Description of parameter                  |
+| ---- |-------------------------------------------|
+|  method  | The proposed or the benchmarked model     |
+|  data  | The dataset used for training and testing |
+|  seed_num  | The seed num                              |
+
+## To evaluate the linear gradient boosting model, please run the following command:
+```c
+python pred_blr.py --data
+```
+The command for training and testing the linear gradient model on the 1960-2009 dataset is shown below:
+```c
+python pred_blr.py --data
+```
+The more detailed command descriptions are shown in following table:
+
+|  Parameter name  | Description of parameter                  |
+| ---- |-------------------------------------------|
+|  learning_rate  | The learning rate                         |
+|  data  | The dataset used for training and testing |
+|  max_iter  | The max ieration                          |
+|  early_stopping  | Whether set the early stopping            |
 
 # Japanese election data
+The Japanese election dataset which can be publically accesible is shown below:
 ```python
 Year LDP_seats GDP PM_approval DAYS
 1960	63.4	9.42	41.6	913
@@ -42,14 +74,20 @@ Year LDP_seats GDP PM_approval DAYS
 ```
 
 # The performance of the proposed ensemble learning and benchmark models 
+The training and evaluating flow chart is shown as below:
+![](result/flowchart.jpg)
+The evaluated performance is shown as below:
 
 ![](result/bar_el_dt_a.png)
 ![](result/bar_el_lr.png)
 
-# The feature importance score based on DT-bagging and DT-gradient boosting models.
+# The feature importance score of the DT-bagging and DT-gradient boosting models.
+The feature importance of the DT-bagging and DT-gradient boosting models are shown as below:
+
 ![](result/feature_importance.png)
 
-# The forecasting result
+# The forecasting results by the proposed and benchmark models.
+The forecasting results by the proposed and benchmark models on 1960-2012 dataset are shown below:
 ![](result/gd_pred.png)
 
 
