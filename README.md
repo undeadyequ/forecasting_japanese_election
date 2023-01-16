@@ -74,14 +74,17 @@ Year LDP_seats GDP PM_approval DAYS
 ```
 
 # The performance of the proposed ensemble learning and benchmark models 
-The training and evaluating flow chart is shown as below:
-![](result/flowchart.jpg)
-The evaluated performance is shown as below:
 
+The training and evaluating flow chart is shown as below:
+
+![](result/flowchart.jpg)
+
+The evaluated performance is shown as below:
 ![](result/bar_el_dt_a.png)
 ![](result/bar_el_lr.png)
 
 # The feature importance score of the DT-bagging and DT-gradient boosting models.
+
 The feature importance of the DT-bagging and DT-gradient boosting models are shown as below:
 
 ![](result/feature_importance.png)
