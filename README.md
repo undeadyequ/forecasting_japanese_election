@@ -71,6 +71,7 @@ Year LDP_seats GDP PM_approval DAYS
 2012	61.3	-0.12	17.3	1204
 2014	61.1	2	45.5	728
 2017	60.4	1.03	41.8	1043
+2021	56.1	-4.4	40.3	1470
 ```
 
 # The performance of the proposed ensemble learning and benchmark models 
